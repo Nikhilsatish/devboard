@@ -1,8 +1,10 @@
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import RepoDetail from "./pages/RepoDetail";
-import Bookmarks from "./pages/Bookmarks";
+import { lazy, Suspense } from "react";
 import "./App.css";
+
+const Home = lazy(() => import("./pages/Home"));
+const Bookmarks = lazy(() => import("./pages/Bookmarks"));
+const RepoDetail = lazy(() => import("./pages/RepoDetail"));
 
 function App() {
   return (
@@ -15,11 +17,13 @@ function App() {
         </nav>
       </header>
       <main className="app-main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/bookmarks" element={<Bookmarks />} />
-          <Route path="/repo/:owner/:repo" element={<RepoDetail />} />
-        </Routes>
+        <Suspense fallback={<p className="loading-page">Loading page...</p>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/bookmarks" element={<Bookmarks />} />
+            <Route path="/repo/:owner/:repo" element={<RepoDetail />} />
+          </Routes>
+        </Suspense>
       </main>
     </BrowserRouter>
   );
