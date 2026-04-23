@@ -9,15 +9,29 @@ function Home() {
   const [user, setUser] = useState(null);
   const [repos, setRepos] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   async function handleSearch(e) {
     e.preventDefault();
     if (!username.trim()) return;
+    setLoading(true);
+    setError(null);
+    setUser(null);
+    setRepos([]);
 
-    const userData = await fetchUser(username);
-    const reposData = await fetchRepos(username);
-
-    setUser(userData);
-    setRepos(reposData);
+    try {
+      const [userData, reposData] = await Promise.all([
+        fetchUser(username),
+        fetchRepos(username),
+      ]);
+      setUser(userData);
+      setRepos(reposData);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -34,6 +48,11 @@ function Home() {
           Search
         </button>
       </form>
+
+      {/* Loading state */}
+      {loading && <p className="status-text">Loading...</p>}
+      {/* Error state */}
+      {error && <p className="error-text">❌ {error}</p>}
 
       {/* User profile - show only when data exists */}
       {user && (
