@@ -1,6 +1,7 @@
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import "./App.css";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const Home = lazy(() => import("./pages/Home"));
 const Bookmarks = lazy(() => import("./pages/Bookmarks"));
@@ -17,13 +18,15 @@ function App() {
         </nav>
       </header>
       <main className="app-main">
-        <Suspense fallback={<p className="loading-page">Loading page...</p>}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/bookmarks" element={<Bookmarks />} />
-            <Route path="/repo/:owner/:repo" element={<RepoDetail />} />
-          </Routes>
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<p className="loading-page">Loading page...</p>}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/bookmarks" element={<Bookmarks />} />
+              <Route path="/repo/:owner/:repo" element={<RepoDetail />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </main>
     </BrowserRouter>
   );
