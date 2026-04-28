@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { fetchUser, fetchRepos } from "../api/github";
+import { useDispatch, useSelector } from "react-redux";
+import { addBookmark, removeBookmark } from "../store/store";
 
 function Home() {
   // Form input state
@@ -11,6 +13,12 @@ function Home() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const bookmarks = useSelector((state) => state); // read from store
+  const dispatch = useDispatch();
+
+  // Helper to check if a repo is bookmarked
+  const isBookmarked = (repoId) => bookmarks.some((b) => b.id === repoId);
 
   async function handleSearch(e) {
     e.preventDefault();
@@ -92,6 +100,16 @@ function Home() {
               <div className="repo-meta">
                 {repo.language && <span>{repo.language}</span>}
                 <span>⭐ {repo.stargazers_count}</span>
+                <button
+                  onClick={() =>
+                    isBookmarked(repo.id)
+                      ? dispatch(removeBookmark(repo.id))
+                      : dispatch(addBookmark(repo))
+                  }
+                  className="bookmark-btn"
+                >
+                  {isBookmarked(repo.id) ? "★ Saved" : "☆ Save"}
+                </button>
               </div>
             </div>
           ))}
