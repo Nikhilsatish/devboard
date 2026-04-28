@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { fetchUser, fetchRepos } from "../api/github";
 import { useDispatch, useSelector } from "react-redux";
-import { addBookmark, removeBookmark } from "../store/store";
+import { addBookmark, removeBookmark } from "../store/bookmarksSlice";
+
 
 function Home() {
   // Form input state
@@ -14,7 +15,7 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const bookmarks = useSelector((state) => state); // read from store
+  const bookmarks = useSelector(state => state.bookmarks) // read from store
   const dispatch = useDispatch();
 
   // Helper to check if a repo is bookmarked
