@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { fetchUser, fetchRepos } from "../api/github";
 import RepoCard from "../components/RepoCard";
+import SearchBar from "../features/search/SearchBar";
 
 function Home() {
   // Form input state
@@ -38,17 +39,11 @@ function Home() {
   return (
     <div className="page-container">
       {/* Search form */}
-      <form onSubmit={handleSearch} className="search-form">
-        <input
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter GitHub username..."
-          className="search-input"
-        />
-        <button type="submit" className="search-btn">
-          Search
-        </button>
-      </form>
+      <SearchBar
+        handleSearch={handleSearch}
+        username={username}
+        setUsername={setUsername}
+      />
 
       {/* Loading state */}
       {loading && <p className="status-text">Loading...</p>}

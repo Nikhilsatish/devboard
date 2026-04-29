@@ -1,6 +1,9 @@
 import { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addBookmark, removeBookmark } from "../store/bookmarksSlice";
+import {
+  addBookmark,
+  removeBookmark,
+} from "../features/bookmarks/bookmarksSlice";
 
 // memo() wraps the component - skips re-render if repo prop unchanged
 const RepoCard = memo(function RepoCard({ repo }) {

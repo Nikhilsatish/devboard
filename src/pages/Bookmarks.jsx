@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { removeBookmark } from "../store/bookmarksSlice";
+import { removeBookmark } from "../features/bookmarks/bookmarksSlice";
 
 function Bookmarks() {
   // Read bookmarks from Redux store
