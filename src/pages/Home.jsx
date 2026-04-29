@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { fetchUser, fetchRepos } from "../api/github";
-import { useDispatch, useSelector } from "react-redux";
-import { addBookmark, removeBookmark } from "../store/bookmarksSlice";
-
+import RepoCard from "../components/RepoCard";
 
 function Home() {
   // Form input state
@@ -14,12 +12,6 @@ function Home() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const bookmarks = useSelector(state => state.bookmarks) // read from store
-  const dispatch = useDispatch();
-
-  // Helper to check if a repo is bookmarked
-  const isBookmarked = (repoId) => bookmarks.some((b) => b.id === repoId);
 
   async function handleSearch(e) {
     e.preventDefault();
@@ -91,31 +83,9 @@ function Home() {
       )}
 
       {/* Repo list */}
-      {repos.length > 0 && (
-        <div className="repo-list">
-          <h3>Repositories</h3>
-          {repos.map((repo) => (
-            <div key={repo.id} className="repo-card">
-              <h4>{repo.name}</h4>
-              <p>{repo.description || "No description"}</p>
-              <div className="repo-meta">
-                {repo.language && <span>{repo.language}</span>}
-                <span>⭐ {repo.stargazers_count}</span>
-                <button
-                  onClick={() =>
-                    isBookmarked(repo.id)
-                      ? dispatch(removeBookmark(repo.id))
-                      : dispatch(addBookmark(repo))
-                  }
-                  className="bookmark-btn"
-                >
-                  {isBookmarked(repo.id) ? "★ Saved" : "☆ Save"}
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      {repos.map((repo) => (
+        <RepoCard key={repo.id} repo={repo} />
+      ))}
     </div>
   );
 }
