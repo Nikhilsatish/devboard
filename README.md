@@ -2,7 +2,7 @@
 
 A production-grade GitHub profile explorer built with React and Redux Toolkit. Search any GitHub username, browse their public repositories, bookmark favourites — all with real API data, code splitting, error boundaries, and a feature-based folder structure.
 
-**[Live Demo →](https://devboard-github-explorer.vercel.app)** &nbsp;|&nbsp; **[GitHub →](https://github.com/Nikhilsatish/devboard-github-explorer)**
+**[Live Demo →](https://devboard-alpha-nine.vercel.app/)** &nbsp;|&nbsp; **[GitHub →](https://github.com/Nikhilsatish/devboard)**
 
 > Project 3 of 3 in my React learning series — covers R21–R30, advanced and production patterns.
 
