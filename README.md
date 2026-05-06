@@ -10,8 +10,7 @@ A production-grade GitHub profile explorer built with React and Redux Toolkit. S
 
 ## 📸 Preview
 
-> Add screenshot after building:
-> `![DevBoard Preview](./public/preview.png)`
+> `![DevBoard Preview](./public/image.png)`
 
 ---
 
