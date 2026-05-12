@@ -9,8 +9,7 @@ A production-grade GitHub profile explorer built with React and Redux Toolkit. S
 ---
 
 ## 📸 Preview
-
-> `![DevBoard Preview](./public/image.png)`
+<img width="1899" height="784" alt="image" src="https://github.com/user-attachments/assets/3eaacd59-001d-420f-b55a-9294a62c0b74" />
 
 ---
 
